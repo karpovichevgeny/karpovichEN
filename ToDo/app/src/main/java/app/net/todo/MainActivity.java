@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -31,7 +32,14 @@ public  class MainActivity extends ListActivity {
         mDbHelper.open();
         fillData();
         registerForContextMenu(getListView());
-        
+        Button btn = (Button) findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() { //даный код сделан не только для кнопки, но и для 5.х.х
+            @Override
+            public void onClick(View v) {
+                createNote();
+                            }
+        });
+
     }
 
     private void fillData() {
@@ -57,12 +65,12 @@ public  class MainActivity extends ListActivity {
         menu.add(0, INSERT_ID, 0, R.string.menu_insert);
         return true;
     }
-
+//
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()){
 //            case R.id.menu_add:
-//                createNote();
+//                Toast.makeText(null, "this", Toast.LENGTH_LONG)
 //               break;}
 //        return super.onOptionsItemSelected(item);
 //    }
@@ -115,6 +123,7 @@ public  class MainActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
     }
+
 
 
 }

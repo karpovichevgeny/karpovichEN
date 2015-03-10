@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ToDo List</string>
-    <string name="no_notes">Нет задач</string>
+    <string name="no_notes"></string>
     <string name="menu_insert">Add Tasks</string>
     <string name="menu_delete">Delete Tasks</string>
     <string name="title">Title</string>
     <string name="body">Body</string>
     <string name="confirm">Сохранить</string>
     <string name="edit_note">Edit Note</string>
-    <string name="action_settings" />
+    <string name="action_settings" >Удалить все</string>
+    <string name="btnText">Добавить задачу</string> />
 </resources>
