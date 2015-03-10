@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
-public class MainActivity extends ListActivity {
+public  class MainActivity extends ListActivity {
     private static final int ACTIVITY_CREATE=0;
     private static final int ACTIVITY_EDIT=1;
 
@@ -31,7 +31,7 @@ public class MainActivity extends ListActivity {
         mDbHelper.open();
         fillData();
         registerForContextMenu(getListView());
-
+        
     }
 
     private void fillData() {
@@ -52,10 +52,20 @@ public class MainActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu);
         menu.add(0, INSERT_ID, 0, R.string.menu_insert);
         return true;
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.menu_add:
+//                createNote();
+//               break;}
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
