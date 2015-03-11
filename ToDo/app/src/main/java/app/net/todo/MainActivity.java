@@ -33,7 +33,8 @@ public  class MainActivity extends ListActivity {
         fillData();
         registerForContextMenu(getListView());
         Button btn = (Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() { //даный код сделан не только для кнопки, но и для 5.х.х
+        btn.setOnClickListener(new View.OnClickListener() {
+        //даный код сделан не только для кнопки, но и для 5.х.х
             @Override
             public void onClick(View v) {
                 createNote();
