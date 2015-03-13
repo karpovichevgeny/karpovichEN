@@ -1,5 +1,7 @@
 package app.net.wgfm;
 
+import android.util.Log;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -16,6 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class RssItem {
 
+    private static final String TAG = "MyActivity";
     private String title;
     private String description;
     private Date pubDate;
@@ -61,8 +64,10 @@ public class RssItem {
 
         ArrayList<RssItem> rssItems = new ArrayList<RssItem>();
 
-        RssItem rssFeedT = new RssItem("WoT News", "News of World of Tanks", new Date(), "http://worldoftanks.ru/ru/rss/news/");
-        rssItems.add(rssFeedT);
+        RssItem rssItemT = new RssItem("WoT news", "description.",
+                new Date(), "http://worldoftanks.ru/ru/rss/wot-assistant/news/");
+
+        rssItems.add(rssItemT);
 
         try {
             //open an URL connection make GET to the server and
@@ -70,8 +75,11 @@ public class RssItem {
             URL url = new URL(feedUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                InputStream is = conn.getInputStream();
+
+
+               InputStream is = conn.getInputStream();
 
                 //DocumentBuilderFactory, DocumentBuilder are used for
                 //xml parsing
@@ -115,10 +123,13 @@ public class RssItem {
 
                         rssItems.add(rssItem);
                     }
-                }
 
+              }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
+
+            Log.e(TAG, "HERE");
             e.printStackTrace();
         }
 

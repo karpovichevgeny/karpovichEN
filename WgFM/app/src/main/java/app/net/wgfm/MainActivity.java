@@ -40,6 +40,7 @@ public   class MainActivity extends ActionBarActivity {
 
 
 
+
         player = new MediaPlayer();
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
@@ -85,14 +86,13 @@ public   class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
+
                 feedUrl = rssURLTV.getText().toString();
                 TextView TVtitle=(TextView)findViewById(R.id.label);
                 CharSequence cs="fetching";
                 TVtitle.setText(cs);
                 aa.notifyDataSetChanged();
                 refressRssList();
-                cs="Feed:";
-                TVtitle.setText(cs);
             }
         });
         rssListView = (ListView) findViewById(R.id.rssListView);
@@ -105,7 +105,7 @@ public   class MainActivity extends ActionBarActivity {
                 // we call the other activity that shows a single rss item in
                 // one page
                 //Intent intent = new Intent("app.net.wgfm.displayRssItem");
-                Intent intent = new Intent("app.net.wgtm.RssItemDisplayer");
+                Intent intent = new Intent("app.net.wgfm.displayRssItem");
                 startActivity(intent);
             }
         });

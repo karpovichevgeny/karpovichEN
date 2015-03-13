@@ -13,7 +13,7 @@ public class RssItemDisplayer extends Activity {
         setContentView(R.layout.activity_rss_item_displayer);
 
         RssItem selectedRssItem = MainActivity.selectedRssItem;
-        //Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         TextView titleTv = (TextView)findViewById(R.id.titleTextView);
         TextView contentTv = (TextView)findViewById(R.id.contentTextView);
 
