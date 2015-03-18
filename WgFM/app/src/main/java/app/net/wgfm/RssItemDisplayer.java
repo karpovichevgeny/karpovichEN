@@ -2,9 +2,7 @@ package app.net.wgfm;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
+import android.webkit.WebView;
 
 public class RssItemDisplayer extends Activity {
     @Override
@@ -14,19 +12,22 @@ public class RssItemDisplayer extends Activity {
 
         RssItem selectedRssItem = MainActivity.selectedRssItem;
         Bundle extras = getIntent().getExtras();
-        TextView titleTv = (TextView)findViewById(R.id.titleTextView);
-        TextView contentTv = (TextView)findViewById(R.id.contentTextView);
+//        TextView titleTv = (TextView)findViewById(R.id.titleTextView);
+//        TextView contentTv = (TextView)findViewById(R.id.contentTextView);
+//
+//        String title = "";
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd - hh:mm:ss");
+//        title = "\n" + selectedRssItem.getTitle() + "  ( "
+//                + sdf.format(selectedRssItem.getPubDate()) + " )\n\n";
+//
+//        String content = "";
+//        content += selectedRssItem.getLink() + "\n"
+//                + selectedRssItem.getDescription()+"\n";
+//        тупо убираю лишний верх
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadUrl(selectedRssItem.getLink());
 
-        String title = "";
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd - hh:mm:ss");
-        title = "\n" + selectedRssItem.getTitle() + "  ( "
-                + sdf.format(selectedRssItem.getPubDate()) + " )\n\n";
-
-        String content = "";
-        content += selectedRssItem.getDescription() + "\n"
-                + selectedRssItem.getLink();
-
-        titleTv.setText(title);
-        contentTv.setText(content);
+//        titleTv.setText(title);
+//       contentTv.setText(content);
     }
 }

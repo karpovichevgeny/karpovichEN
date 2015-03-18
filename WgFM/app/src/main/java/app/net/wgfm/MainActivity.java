@@ -3,8 +3,10 @@ package app.net.wgfm;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 
 
 public   class MainActivity extends ActionBarActivity {
-
+    private static final String TAG = "MyActivity";
     Button play_button, pause_button;
     MediaPlayer player;
     TextView text_shown;
@@ -28,6 +30,7 @@ public   class MainActivity extends ActionBarActivity {
     ListView rssListView = null;
     ArrayList<RssItem> rssItems = new ArrayList<RssItem>();
     ArrayAdapter<RssItem> aa = null;
+    MyTask mt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public   class MainActivity extends ActionBarActivity {
 
         try {
             player.prepare();
-        } catch (IllegalStateException e) {
+            } catch (IllegalStateException e) {
             Toast.makeText(getApplicationContext(), "Check the URL!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "Check the URL!", Toast.LENGTH_LONG).show();
@@ -83,7 +86,6 @@ public   class MainActivity extends ActionBarActivity {
         final TextView rssURLTV = (TextView) findViewById(R.id.rssURL);
         Button fetchRss = (Button) findViewById(R.id.fetchRss);
         fetchRss.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 
@@ -105,8 +107,8 @@ public   class MainActivity extends ActionBarActivity {
                 // we call the other activity that shows a single rss item in
                 // one page
                 //Intent intent = new Intent("app.net.wgfm.displayRssItem");
-                Intent intent = new Intent("app.net.wgfm.displayRssItem");
-                startActivity(intent);
+                Intent i = new Intent(MainActivity.this, RssItemDisplayer.class);
+                startActivity(i);
             }
         });
 
@@ -115,17 +117,39 @@ public   class MainActivity extends ActionBarActivity {
         feedUrl = rssURLTV.getText().toString();
         refressRssList();
     }
-
-
     private void refressRssList() {
 
-        ArrayList<RssItem> newItems = RssItem.getRssItems(feedUrl);
-
-        rssItems.clear();
-        rssItems.addAll(newItems);
-        aa.notifyDataSetChanged();
-
+        mt = new MyTask();
+        mt.execute();
     }
+
+    class  MyTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e(TAG, "onPreExecute", null);
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<RssItem> newItems = RssItem.getRssItems(feedUrl);
+            rssItems.clear();
+            rssItems.addAll(newItems);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void Void) {
+
+            super.onPostExecute(Void);
+            aa.notifyDataSetChanged();
+            Log.e(TAG, "onPostExecute", null);
+        }
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+
 }
 
 

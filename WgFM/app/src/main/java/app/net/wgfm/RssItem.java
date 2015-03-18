@@ -60,6 +60,7 @@ public class RssItem {
         return result;
     }
 
+
     public static ArrayList<RssItem> getRssItems(String feedUrl) {
 
         ArrayList<RssItem> rssItems = new ArrayList<RssItem>();
@@ -69,6 +70,8 @@ public class RssItem {
 
         rssItems.add(rssItemT);
 
+
+
         try {
             //open an URL connection make GET to the server and
             //take xml RSS data
@@ -77,7 +80,6 @@ public class RssItem {
 
 
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
 
                InputStream is = conn.getInputStream();
 
